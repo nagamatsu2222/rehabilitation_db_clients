@@ -33,3 +33,20 @@ h1 {
   border: 2px solid #eee;
   padding: 4px 8px;
 }
+.user_list{
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: flex;
+  flex-wrap: wrap;
+}
+.user_list dt,
+.user_list dd{
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  box-sizing: border-box;
+}
+.user_list dt{
+}
+.user_list dd{
+  margin: 0;
+}

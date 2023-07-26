@@ -11,12 +11,13 @@ app.use(bodyParser.urlencoded({
 app.set('view engine', 'ejs');
 
 const mysql = require('mysql2');
+const { info } = require('console');
 
 const con = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'rootroot',
-  database: 'rehabilitation_db'
+  password: 'root',
+  database: 'express_db'
 });
 
 // cssファイルの取得
@@ -25,7 +26,6 @@ app.use(express.static('assets'));
 // mysqlからデータを持ってくる
 app.get('/', (req, res) => {
   const sql = "select * from clients";
-
   con.query(sql, function (err, result, fields) {
     if (err) throw err;
     res.render('index', {
@@ -52,6 +52,15 @@ app.get('/edit/:id', (req, res) => {
   con.query(sql, [req.params.id], function (err, result, fields) {
     if (err) throw err;
     res.render('edit', {
+      user: result
+    });
+  });
+});
+app.get('/list/:id', (req, res) => {
+  const userinfo = "SELECT * FROM userinfo WHERE id = ?";
+  con.query(userinfo, [req.params.id], function (err, result, fields) {
+    if (err) throw err;
+    res.render('list', {
       user: result
     });
   });
